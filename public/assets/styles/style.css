@@ -26,26 +26,27 @@ body {
 .navbar {
     height: 60px;
     background-color: var(--nav-background);
-    color:var(--primary-color);
+    color: var(--primary-color);
     display: flex;
     justify-content: space-between;
 
 }
 
 
-.nav-left-div,.nav-right-div{
+.nav-left-div,
+.nav-right-div {
     display: flex;
     align-items: center;
 }
 
 
-#hamberger{
-    margin-right:20px;
+#hamberger {
+    margin-right: 20px;
     cursor: pointer;
-    color:white;
+    color: white;
     font-size: 1.5rem;
     display: none;
-    
+
 }
 
 .logo-div {
@@ -71,6 +72,7 @@ body {
     align-items: center;
     list-style: none;
     margin-left: 50px;
+    z-index: 5;
 
 }
 
@@ -80,6 +82,7 @@ body {
     font-weight: bold;
     font-family: var(--primary-font);
     margin-inline: 10px;
+    z-index: 8;
 }
 
 .nav-link,
@@ -89,19 +92,20 @@ body {
     text-decoration-style: none;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     font-weight: bold;
     color: var(--seondary-color);
     cursor: pointer;
 }
 
-.login{
-    margin-right:20px;
+.login {
+    margin-right: 20px;
 }
-.login:hover{
+
+.login:hover {
     background-color: var(--tertiary-background);
     color: var(--nav-background);
-    padding:4px 7px;
+    padding: 4px 7px;
     border-radius: 7px;
 }
 
@@ -177,8 +181,8 @@ article {
     padding-bottom: 20px;
 }
 
-.our-sponsor>h2{
-    padding-top:20px;
+.our-sponsor>h2 {
+    padding-top: 20px;
 }
 
 .sponsor-img {
@@ -384,7 +388,7 @@ article {
 }
 
 .teamname {
-    font-family:var(--primary-font);
+    font-family: var(--primary-font);
     color: blue;
     font-weight: bold;
     font-size: 1.1rem;
@@ -421,6 +425,9 @@ h1 {
 
 }
 
+.contact-form>input,.contact-form>textarea{
+    background-color: var(--tertiary-color);
+}
 input {
     height: 35px;
     width: 35%;
@@ -448,11 +455,73 @@ input {
     transition: .2s ease-in-out;
 }
 
-.container{
-background-color: var(--tertiary-background);
+.container {
+    background-color: var(--primary-color);
 }
+
+.container>p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: var(--secondary-background);
+}
+
 /* contact.ejs finish */
 
+/* login start */
+
+.login-page{
+    background-color: var(--primary-background);
+    height:90vh;
+}
+.form-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: red;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    border-radius: 8px;
+    margin: auto auto;
+    margin-top:30px;
+    width: 35%;
+    box-shadow: 10px 10px var(--tertiary-background);
+
+}
+
+.form-login>img {
+    height: 80px;
+    width: 80px;
+    margin: auto auto;
+}
+
+.form-login {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: auto auto;
+    justify-content: center;
+    row-gap: 15px;
+}
+
+.form-login>input {
+    width: 80%;
+}
+
+.form-login>button {
+    width: 60%;
+}
+.form-login>button:hover{
+    background-color:transparent;
+}
+.signup-link {
+    text-align: center;
+    margin: auto auto;
+    color: var(--primary-color);
+}
+
+/* login finish */
 
 
 /* footer start */
@@ -466,12 +535,12 @@ footer {
 
 
 #footer {
-
     background-color: var(--seondary-color);
-    justify-content: center;
     font-size: 1.2rem;
+    width: 100%;
     color: var(--primary-color);
     font-family: var(--primary-font);
+    bottom: 0;
     margin-bottom: 0;
     padding: 20px 20px;
 }

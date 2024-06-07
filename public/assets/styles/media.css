@@ -24,6 +24,12 @@
 
 @media only screen and (max-width: 590px) {
 
+    #footer{
+        position:absolute;
+        bottom: 0;
+        margin-bottom: 0;
+       }
+
     .nav-ul {
         position: absolute;
         top: 60px;
@@ -53,4 +59,28 @@
     .btn-primary {
         width: 60%;
     }
+    .login-page{
+        height:82vh;
+    }
+    .form-div{
+        width:80%;
+        margin-block: 20px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+.login-page{
+    height: 100vh;
+}
+}
+
+@media only screen and (min-width: 760px) and (max-width:1280px) {
+.login-page{
+    height: 90vh;
+}
+   .form-div{
+    margin-top:40px;
+   }
+
+  
 }
