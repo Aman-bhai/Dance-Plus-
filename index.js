@@ -4,8 +4,8 @@ const { hashSync } = require('bcrypt')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
-const mongoConnect = require("./utils/database")
 const Contact = require("./model/contact.model")
+const UserModel = require("./model/user.model")
 let { body, validationResult } = require('express-validator')
 const path = require("path")
 
@@ -21,7 +21,6 @@ dotenv.config()
 
 const app = express()
 
-mongoConnect
 
 app.set('view engine', 'ejs')
 app.use(express.static("public"))
@@ -29,31 +28,80 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set("views", path.join(__dirname + "/views"))
 
 
+mongoose.connect(process.env.PASS).then(() => {
+    console.log("Server is Connected with DataBase")
+}).catch(() => {
+    console.log("Internal Server Error")
+})
+
+app.use(session({
+    secret: process.env.RANDOM,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.PASS, collectionName: "Sessions" }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}))
+
+
+require('./config/passport');
+
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.get("/", (req, res) => {
-    res.render("home")
+    if (req.isAuthenticated()) {
+        res.status(200).render('home')
+    } else {
+        res.status(401).render('login')
+    };
 })
+
 
 app.get("/gallary", (req, res) => {
-    res.render("gallary")
+    if (req.isAuthenticated()) {
+        res.status(200).render("gallary")
+    } else {
+        res.status(401).render('login')
+    }
 })
+
 
 app.get("/class-info", (req, res) => {
-    res.render("class")
+    if (req.isAuthenticated()) {
+        res.status(200).render("class")
+    } else {
+        res.status(401).render('login')
+    }
 })
 
+
 app.get("/faculty", (req, res) => {
-    res.render("faculty")
+    if (req.isAuthenticated()) {
+        res.status(200).render("faculty")
+    } else {
+        res.status(401).render('login')
+    }
 })
+
 
 app.get("/success", (req, res) => {
     res.status(200).json("Thank You For Contacting Us!")
 })
 
 
+
 app.get("/contact", (req, res) => {
-    res.render("contact")
+    if (req.isAuthenticated()) {
+        res.status(200).render("contact")
+    } else {
+        res.status(401).render('login')
+    }
 })
+
 
 
 app.post("/contact", [
@@ -75,15 +123,58 @@ app.post("/contact", [
     }
     Contact.create(contacts)
     res.redirect("/success")
-
-
-    res.redirect("/contact")
 })
+
+
+
 app.get("/login", (req, res) => {
     res.render("login")
 })
+
+app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/unauthorized' }))
+
+app.get('/logout', function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        res.redirect('/login');
+    });
+});
+
+app.get("/unauthorized", (req, res) => {
+    res.status(404).json({ error: "Unathorized Access" })
+})
+
+
 app.get("/signup", (req, res) => {
     res.render("signup")
+})
+
+app.post("/signup", [
+    body('username', 'Enter a valid username').notEmpty(),
+    body('password', 'Enter a valid Password').isLength({ min: 8 })
+], (req, res) => {
+    let { username, password } = req.body
+    let error = validationResult(req)
+    if (!error.isEmpty()) {
+        return res.status(400).json({ error: error.array() })
+    }
+
+    UserModel.findOne({ username }).then((data) => {
+        if (data) {
+            return res.status(400).json({ error: 'User with this User name is already exists' });
+
+        }
+        let user = {
+            username: req.body.username,
+            password: hashSync(req.body.password, 10)
+        }
+
+        UserModel.create(user)
+        res.render("login")
+
+    }).catch((err) => {
+        console.log(err)
+    })
 })
 
 app.listen(port, () => {

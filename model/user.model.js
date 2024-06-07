@@ -6,6 +6,6 @@ const userSchema = mongoose.Schema({
     date: { type: String, default: Date }
 }, { timestamps: true });
 
-const UserModel = models?.UserModel || model('User', userSchema);
+const UserModel = mongoose.models?.UserModel || mongoose.model('User', userSchema);
 
 module.exports = UserModel;
