@@ -10,6 +10,6 @@ let Contactschema = new mongoose.Schema({
     date: { type: String, default: Date }
 }, { timestamps: true });
 
-const Contact = models?.Contact || model('Contact', Contactschema);
+const Contact = mongoose.models?.Contact || mongoose.model('Contact', Contactschema);
 
 module.exports = Contact;
