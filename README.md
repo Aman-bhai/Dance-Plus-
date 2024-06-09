@@ -1,6 +1,6 @@
 # Dance Academy Website
 
-This is a sample website for a dance academy, built using Node.js, EJS templates, Passport.js for authentication, and MongoDB Atlas for data storage. Images are sourced from pixabay and Pexels.
+This is a sample website for a dance academy, built using Node.js, EJS templates, Passport.js for authentication, and MongoDB Atlas for data storage. Images are sourced from pixabay and Pexels and All Data that is inside the this application is sample data or fake data.
 
 ## Features
 
