@@ -89,7 +89,7 @@ app.get("/faculty", (req, res) => {
 
 
 app.get("/success", (req, res) => {
-    res.status(200).render('return')
+    res.status(200).render("return")
 })
 
 
