@@ -19,9 +19,6 @@
 }
 
 
-body {
-    height: 100vh;
-}
 
 .navbar {
     height: 60px;
@@ -324,7 +321,11 @@ article {
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     background-color: var(--primary-color);
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 
 .class-card>h3 {
@@ -425,9 +426,11 @@ h1 {
 
 }
 
-.contact-form>input,.contact-form>textarea{
+.contact-form>input,
+.contact-form>textarea {
     background-color: var(--tertiary-color);
 }
+
 input {
     height: 35px;
     width: 35%;
@@ -470,10 +473,11 @@ input {
 
 /* login start */
 
-.login-page{
+.login-page {
     background-color: var(--primary-background);
-    height:90vh;
+    height: 90vh;
 }
+
 .form-div {
     display: flex;
     justify-content: center;
@@ -484,7 +488,7 @@ input {
     padding-bottom: 30px;
     border-radius: 8px;
     margin: auto auto;
-    margin-top:30px;
+    margin-top: 30px;
     width: 35%;
     box-shadow: 10px 10px var(--tertiary-background);
 
@@ -512,9 +516,11 @@ input {
 .form-login>button {
     width: 60%;
 }
-.form-login>button:hover{
-    background-color:transparent;
+
+.form-login>button:hover {
+    background-color: transparent;
 }
+
 .signup-link {
     text-align: center;
     margin: auto auto;
